@@ -76,7 +76,7 @@ class Chats(db.Model): # Таблица хранения сообщений и �
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     link = db.Column(db.Integer, db.ForeignKey('pchats.id')) #Подвязываем чат к тексту участников
-    text = db.Column(db.String(1023), nullable=False)
+    text = db.Column(db.String(2000), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
