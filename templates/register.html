@@ -1,0 +1,44 @@
+{% extends 'base.html' %} <!-- расширяем основной блок -->
+
+{% block content %}
+{{ super() }} <!-- Все что было внутри base.html -->
+<div class="container mt-5" >
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% for cat, msg in get_flashed_messages(True) %}
+            <div class="alert alert-{{ cat }} text-center">{{ msg }}</div>
+            {% endfor %}
+            <div class="card">
+                <div class="card-body">
+                    <form action="/register" method="post" class="w-100">
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            <!-- Обработка полей формы -->
+                            {% for field in form if field.name not in ['csrf_token', 'submit'] %}
+                                <div class="form-group">
+                                    {% if field.errors %}
+                                        {{ field(class_="form-control is-invalid", style="margin: 20px 0;") }}
+                                        <div class="invalid-feedback">
+                                            {% for error in field.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{ field(class_="form-control", placeholder=field.label.text, style="margin: 20px 0; box-shadow: 0 4px 6px rgba(29, 29, 29, 0.1);") }}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Кнопка отправки -->
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class_="btn btn-dark", style="margin-top: 20px;") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

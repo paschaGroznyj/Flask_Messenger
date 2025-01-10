@@ -1,0 +1,215 @@
+/* Основной контейнер профиля */
+.profile_table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+/* Заголовок профиля */
+.profile-container h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* Картинка профиля */
+.profile-ava img {
+    width: 150px; /* Задаём фиксированную ширину */
+    height: 150px; /* Задаём фиксированную высоту */
+    object-fit: cover; /* Сохраняем пропорции и заполняем контейнер */
+    border-radius: 50%; /* Округляем картинку */
+
+}
+
+
+
+/* Информация о профиле */
+.profile-info {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.profile-info li {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Ссылка на выход */
+.logout-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/* Стили для кнопок */
+button, .upload-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .upload-button:hover {
+    background-color: #0056b3;
+}
+
+/* Поля ввода файла */
+.file-input {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/*ДОБАВЛЕНИЕ МОДАЛЬНОГО ОКНА
+/* Полупрозрачный фон */
+#modal:target ~ .content {
+    filter: blur(5px); /* Делает фон матовым */
+    pointer-events: none; /* Отключает клики по фону */
+}
+/* Показываем модальное окно Edit */
+#modalEdit:target {
+    display: block;
+}
+
+#modalEdit:target .modal {
+    display: block;
+}
+
+#modalEdit:target .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9;
+}
+
+
+/* Модальное окно */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 500px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+
+
+/* Показываем модальное окно */
+#modal:target .modal {
+    display: block;
+}
+
+/* Полупрозрачный фон */
+#modal:target .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Тёмный полупрозрачный фон */
+    z-index: 9;
+}
+
+/* Кнопки */
+.modal .button {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #0059b2;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal .button:hover {
+    background-color: #CC0000;
+}
+
+.modal .button.cancel {
+    background-color: #6c757d;
+}
+
+.modal .button.cancel:hover {
+    background-color: #5a6268;
+}
+
+.profile-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+}
+
+.profile-ava img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-info {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.profile-info .list-group-item {
+    font-size: 16px;
+    border: none;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-info .list-group-item:last-child {
+    border-bottom: none;
+}
+
+.alert {
+    font-size: 14px;
+}
+
+.modal .btn {
+    margin: 5px;
+}
+
+#preview {
+    display: block;
+    max-width: 100%;
+    margin-top: 10px;
+}

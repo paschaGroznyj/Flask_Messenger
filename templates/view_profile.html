@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<div class="profile-container">
+    {%for result in results%}
+    <div class="profile-header d-flex align-items-center">
+        <div class="profile-ava">
+            <img class="img-fluid rounded-circle shadow" src="{{ result.image or url_for('static', filename='images_html/image/img.jpg') }}" alt="Avatar">
+        </div>
+       <a href="{{ url_for('chats_bp.create_chat', person=result.user_id) }}" class="ms-auto" style="margin: 0px 50%;"> <!-- Сместить кнопку вправо -->
+            <button class="btn btn-dark">Написать сообщение</button>
+        </a>
+    </div>
+
+    <div class="profile-content mt-4">
+        <ul class="profile-info list-group shadow-sm">
+            <li class="list-group-item"><strong>Имя:</strong> {{ result.name }}</li>
+            <li class="list-group-item"><strong>Никнейм:</strong> {{ result.nickname }}</li>
+            <li class="list-group-item"><strong>О себе:</strong> {{ result.about }}</li>
+            <li class="list-group-item"><strong>Количество сообщений:</strong> {{ result.counter_msg }}</li>
+        </ul>
+        {%endfor%}
+    </div>
+
+    {% for cat, msg in get_flashed_messages(True) %}
+        <div class="alert alert-{{ 'danger' if cat == 'error' else cat }} alert-dismissible fade show mt-4 shadow-sm" role="alert">
+            {{ msg }}
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Модальные окна -->
+<div id="modal">
+    <div class="overlay"></div>
+    <div class="modal">
+        <h2>Вы уверены, что хотите выйти?</h2>
+        <p>Сохранить текущую сессию или выйти?</p>
+        <a href="{{ url_for('login_bp.logout') }}" class="btn btn-danger">Выйти</a>
+        <a href="#" class="btn btn-secondary cancel">Отмена</a>
+    </div>
+</div>
+
+<div id="modalEdit">
+    <div class="overlay"></div>
+    <div class="modal">
+        <h2>Редактирование профиля</h2>
+        <form action="{{ url_for('profile_bp.upload') }}" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Новое фото профиля</label>
+                <input class="form-control" type="file" id="formFile" onchange="previewImage(event)" name="file">
+            </div>
+            <img id="preview" src="#" alt="Превью" style="display:none; max-width: 20%; height: auto; margin-top: 10px;">
+            <button type="submit" class="btn btn-dark">Загрузить</button>
+        </form>
+        <form action="{{ url_for('profile_bp.upload_info') }}" method="post" style="margin: 10px 0px;">
+            <input type="text" class="form-control my-2" name="name" placeholder="Новое имя">
+            <input type="text" class="form-control my-2" name="nickname" placeholder="Новый никнейм">
+            <textarea class="form-control my-2" name="about" placeholder="Информация о себе"></textarea>
+            <button type="submit" class="btn btn-dark">Сохранить изменения</button>
+        </form>
+        <a href="#" class="btn btn-secondary cancel">Отмена</a>
+    </div>
+</div>
+{% endblock %}

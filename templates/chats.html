@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+
+    <div class="msger" >
+        <header>
+            <ul class="list-group">
+        {% for data in chats_data %}
+
+        <li class="list-group-item d-flex align-items-center">
+                <a href="{{url_for('profile_bp.view_profile', username = data.nickname)}}"><!--Переход на профиль-->
+                    <img
+                    class="msg-img me-3"
+                    src="{{ data.image or url_for('static', filename='images_html/image/img_2.png') }}"
+                    alt="Avatar" />
+                </a>
+            <div>
+                <strong>{{ data.nickname }}</strong>
+            </div>
+        </li>
+        {% endfor %}
+            </ul>
+        </header>
+
+          <a href="{{ url_for('chats_bp.chats_request', chat_id = chat_id) }}" style="display: none" id = "link_for_json"></a>
+          <main class="msger-chat" id="main_for_messages">
+          </main>
+
+          <div class="msger-inputarea">
+                <input
+                    type="text"
+                    class="msger-input"
+                    name="message"
+                    placeholder="{{ com }}"
+                    id="messageInput" />
+
+                <button type="submit" class="msger-send-btn" id="my_button">&#9658;</button> <!-- Используем символ стрелки -->
+          </div>
+
+    </div>
+        <div id="myBlock"></div>
+
+        <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+{% endblock %}
+
+
+
+

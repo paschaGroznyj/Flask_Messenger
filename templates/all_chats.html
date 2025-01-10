@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+
+{%if chats_data%}
+ <section class="msger">
+       <ul class="list-group">
+    {% for data in chats_data %}
+    <a href="{{ url_for('chats_bp.chats', chat_id = data.chat_id) }}" class="text-decoration-none"> <!-- Вся область как ссылка -->
+        <li class="list-group-item d-flex align-items-center">
+            <img
+                class="msg-img me-3"
+                src="{{ data.image or url_for('static', filename='images_html/image/img.jpg') }}"
+                alt="Avatar" />
+            <div>
+                <strong>{{ data.nickname }}</strong>
+                <p class="mb-0">{{data.who}}{{ data.last_message or "Нет сообщений" }}</p>
+                <p class="mb-1">{{ data.date_time }}</p>
+            </div>
+        </li>
+    </a>
+    {% endfor %}
+</ul>
+        </section>
+        <div id="myBlock"></div>
+{%else%}
+<div class="empty-section">
+    <h2>Попробуйте найти пользователей, чтобы написать сообщение</h2>
+    <p style="color: white;">Перейти в</p>
+    <a href="{{ url_for('search_bp.search') }}">Поиск</a>
+</div>
+{%endif%}
+
+
+{% endblock %}

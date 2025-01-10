@@ -1,0 +1,217 @@
+:root {
+    --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --msger-bg: #fff;
+    --border: 2px solid #ddd;
+    --left-msg-bg: #ececec;
+    --right-msg-bg: #579ffb;
+  }
+
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('{{ url_for('static', filename='images_html/image/background.jpg') }}');
+    font-family: Helvetica, sans-serif;
+  }
+
+  .msger {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 867px;
+    margin: 90px 10px 25px; /* Добавлен верхний отступ для учета высоты навбара */
+    height: 85%;
+    border: var(--border);
+    border-radius: 5px;
+    background: var(--msger-bg);
+    box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+}
+
+  .msger-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: var(--border);
+    background: #eee;
+    color: #666;
+  }
+
+  .msger-chat {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
+  .msger-chat::-webkit-scrollbar {
+    width: 6px;
+  }
+  .msger-chat::-webkit-scrollbar-track {
+    background: #ddd;
+  }
+  .msger-chat::-webkit-scrollbar-thumb {
+    background: #bdbdbd;
+  }
+  .msg {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 5px;
+  }
+  .msg:last-of-type {
+    margin: 0;
+  }
+  .msg-img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    background: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+  }
+  .msg-bubble {
+    max-width: 450px;
+    padding: 15px;
+    border-radius: 15px;
+    background: var(--left-msg-bg);
+  }
+  .msg-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .msg-info-name {
+    margin-right: 10px;
+    font-weight: bold;
+  }
+  .msg-info-time {
+    font-size: 0.7em;
+  }
+
+  .left-msg .msg-bubble {
+    border-bottom-left-radius: 0;
+  }
+
+  .right-msg {
+    flex-direction: row-reverse;
+  }
+  .right-msg .msg-bubble {
+    background: var(--right-msg-bg);
+    color: #fff;
+    border-bottom-right-radius: 0;
+  }
+  .right-msg .msg-img {
+    margin: 0 0 0 50px;
+  }
+
+ .msger-inputarea {
+    display: flex;
+    align-items: center; /* Центрируем элементы по вертикали */
+    padding: 10px;
+    background: #f8f9fa; /* Светлый фон */
+    border-top: 1px solid #ddd;
+    border-radius: 0 0 5px 5px; /* Скругленные углы для общего стиля */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень для эстетики */
+}
+
+.msger-input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 25px; /* Скругление для единого дизайна */
+    background: #e9ecef;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Внутренняя тень для глубины */
+    outline: none; /* Убираем стандартный фокус */
+    transition: background 0.3s ease;
+}
+
+.msger-input:focus {
+    background: #ffffff; /* Подсветка при фокусе */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Синяя подсветка */
+}
+
+.msger-send-btn {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 50%; /* Делает кнопку круглой */
+    background: #007bff; /* Синий фон (Bootstrap Primary) */
+    color: #ffffff; /* Белый текст */
+    font-weight: bold;
+    font-size: 1.2rem; /* Размер текста */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Центрируем текст внутри кнопки */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Легкая тень */
+}
+
+.msger-send-btn:hover {
+    background: #0056b3; /* Более темный синий при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Увеличиваем тень */
+}
+
+.msger-send-btn:active {
+    background: #003f7f; /* Еще более темный цвет при нажатии */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2); /* Внутренняя тень */
+}
+
+  .msger-chat {
+    background-color: #fcfcfe;
+
+
+.logout-link{
+    text-decoration: none;
+}
+
+.msg-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  overflow: hidden;
+
+}
+
+.msg-img:hover {
+  transform: scale(1.1); /* Увеличивает аватарку на 10% */
+  border-color: #007bff; /* Меняет цвет рамки */
+}
+
+.msg-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.msger-send-btn {
+  margin-left: 10px;
+  background: #4caf50;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.msger-send-btn:hover {
+  background: #45a049;
+}
+
