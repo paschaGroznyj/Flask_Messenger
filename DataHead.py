@@ -1,6 +1,6 @@
 from flask_login import current_user
 from app_db import app, Users, Chats, Profile, ChatMembers, PChats, db
-from sqlalchemy import  and_
+from sqlalchemy import  and_, func
 import base64
 
 # Вывод информации по собеседнике в личных сообщениях или
@@ -46,11 +46,24 @@ class DataShapka:
         )
 
         # Получить последние сообщения для каждого чата
-        last_messages = (
-            db.session.query(Chats.link, Chats.text, Chats.created_at, Chats.user_id)  # link - это chat_id
+        subq = (
+            db.session.query(
+                Chats.link,
+                func.max(Chats.created_at).label("max_created_at")
+            )
             .filter(Chats.link.in_(friends_ids.values()))
             .group_by(Chats.link)
-            .order_by(db.func.max(Chats.created_at).desc())  # Упорядочить по последнему сообщению
+        ).subquery()
+
+        last_messages = (
+            db.session.query(
+                Chats.link,
+                Chats.text,
+                Chats.created_at,
+                Chats.user_id
+            )
+            .join(subq, and_(Chats.link == subq.c.link, Chats.created_at == subq.c.max_created_at))
+            .order_by(Chats.created_at.desc())
             .all()
         )
 
