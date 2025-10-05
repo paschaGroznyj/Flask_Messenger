@@ -41,7 +41,7 @@ class UserLogin(UserMixin):
         img = None
         if not self.__profile.image_pr:
             try:
-                with app.open_resource(app.root_path + url_for("static", filename="images_html/image/img.jpg"),
+                with app.open_resource(app.root_path + url_for("static", filename="images_html/image/img.png"),
                                        "rb") as f:
                     img = f.read()
             except FileNotFoundError as e:
