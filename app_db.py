@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from config import DB_SETTING
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'fddmvkdmvkmvskdfsdkvm'
@@ -9,7 +10,9 @@ app.config.from_object(__name__)#Подгружаем нашу конфигур�
 db = SQLAlchemy()
 
 # Конфигурация приложения
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = (f'postgresql://{DB_SETTING["DB_USER"]}:{DB_SETTING["DB_PASSWORD"]}'
+                                        f'@{DB_SETTING["DB_HOST"]}:{DB_SETTING["DB_PORT"]}/{DB_SETTING["DB_NAME"]}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -138,3 +141,7 @@ class Profile(db.Model): # Таблица профилей Юзеров с ав�
             db.session.rollback()  # Откатываем изменения в случае ошибки
             return False
 
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        print("Таблицы созданы")

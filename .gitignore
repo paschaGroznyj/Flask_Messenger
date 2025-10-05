@@ -3,5 +3,6 @@ instance/*.db
 #git commit -m "Удалил базы данных из репозитория и добавил их в .gitignore"
 #git push origin main
 .idea/
+.env
 
 
